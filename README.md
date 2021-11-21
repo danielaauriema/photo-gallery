@@ -9,5 +9,7 @@ This first MVP is the Java Spring backend with Docker.
 
 This is the current architecture:
 
-![photo gallery architecture](https://github.com/danielaauriema/photo-gallery/docs/architecture.png)
+![photo gallery architecture](https://github.com/danielaauriema/photo-gallery/blob/main/docs/architecture.png)
+
+You can customize your setup using /config.sh and then build and deploy in your local computer using /run.sh .
 
