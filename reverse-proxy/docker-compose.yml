@@ -1,0 +1,16 @@
+version: '3' 
+services: 
+
+  proxy:
+    container_name: photo-gallery-proxy
+    image: photo-gallery-proxy
+    restart: always
+    ports:
+      - 80:80
+    networks: 
+      - photo-gallery-net    
+
+networks:
+  photo-gallery-net:
+    external:
+      name: infra_photo-gallery-net

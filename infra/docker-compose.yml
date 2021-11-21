@@ -1,0 +1,49 @@
+version: '3' 
+services: 
+
+  postgres:
+    container_name: photo-gallery-db
+    image: postgres:9.6.24-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DEFAULT_USER}
+      POSTGRES_PASSWORD: ${DEFAULT_PASSWORD}
+      POSTGRES_DB: ${DEFAULT_DB}
+    volumes:
+      - ${DATA}/photo-gallery-db/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks: 
+      - photo-gallery-net
+
+  pgadmin:
+    container_name: photo-gallery-pgadmin
+    image: dpage/pgadmin4:6.2
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DEFAULT_PASSWORD}
+    volumes:
+      - ${DATA}/photo-gallery-pgadmin/servers.json:/pgadmin4/servers.json
+    ports:
+      - 81:80
+    networks: 
+      - photo-gallery-net
+  
+  mongo:
+    container_name: photo-gallery-mongo
+    image: mongo:5.0.4-focal
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DEFAULT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DEFAULT_PASSWORD}
+    volumes:
+      - ${DATA}/photo-gallery-mongo/db:/data/db
+    ports:
+      - 27017:27017
+    networks: 
+      - photo-gallery-net
+
+networks:
+  photo-gallery-net:
+    driver: bridge
